@@ -1092,6 +1092,14 @@
             document.getElementById('bebi-pend').innerText = bebiCust.filter(c => c.status === 'Pending').length;
 
             const completedOrders = customers.filter(c => c.status === 'Completed');
+            const completedOrders = customers.filter(c => c.status === 'Completed').sort((a, b) => {
+    let dateA = new Date(a.completedAt || a.deliveryDate);
+    let dateB = new Date(b.completedAt || b.deliveryDate);
+    return dateB - dateA; // ഏറ്റവും പുതിയതായി കംപ്ലീറ്റ് ആയവ ആദ്യം വരും
+});
+
+const pendingOrders = customers.filter(c => c.status === 'Pending').sort((a, b) => new Date(a.deliveryDate) - new Date(b.deliveryDate));
+
             const pendingOrders = customers.filter(c => c.status === 'Pending').sort((a,b) => new Date(a.deliveryDate) - new Date(b.deliveryDate));
 
             document.getElementById('total-orders-count').innerText = customers.length;
