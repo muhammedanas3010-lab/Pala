@@ -343,6 +343,10 @@
                         <input type="number" id="cust-delivery-charge" oninput="calculateFinances()" required class="w-full border rounded-lg p-2 mt-1">
                     </div>
                     <div>
+                        <label class="font-semibold text-gray-600">Stitching Charge (₹)</label>
+                        <input type="number" id="cust-stitching-charge" oninput="calculateFinances()" required class="w-full border rounded-lg p-2 mt-1">
+                    </div>
+                </div>
 
                 <div class="grid grid-cols-2 gap-2">
                     <div>
@@ -1086,19 +1090,9 @@
             document.getElementById('bebi-exp').innerText = `₹${bebiCust.reduce((s, c) => s + c.totalExpense, 0)}`;
             document.getElementById('bebi-comp').innerText = bebiCust.filter(c => c.status === 'Completed').length;
             document.getElementById('bebi-pend').innerText = bebiCust.filter(c => c.status === 'Pending').length;
-const completedOrders = customers.filter(c => c.status === 'Completed').sort((a, b) => {
-    let dateA = new Date(a.completedAt || a.deliveryDate);
-    let dateB = new Date(b.completedAt || b.deliveryDate);
-    return dateB - dateA;
-});
 
-            const completedOrders = customers.filter(c => c.status === 'Completed').sort((a, b) => {
-    let dateA = new Date(a.completedAt || a.deliveryDate);
-    let dateB = new Date(b.completedAt || b.deliveryDate);
-    return dateB - dateA;
-});
-
-const pendingOrders = customers.filter(c => c.status === 'Pending').sort((a, b) => new Date(a.deliveryDate) - new Date(b.deliveryDate));
+            const completedOrders = customers.filter(c => c.status === 'Completed');
+            const pendingOrders = customers.filter(c => c.status === 'Pending').sort((a,b) => new Date(a.deliveryDate) - new Date(b.deliveryDate));
 
             document.getElementById('total-orders-count').innerText = customers.length;
             document.getElementById('stat-completed-count').innerText = completedOrders.length;
@@ -1220,6 +1214,10 @@ const pendingOrders = customers.filter(c => c.status === 'Pending').sort((a, b) 
     </script>
 </body>
 </html>
+
+
+
+
 
 
 
