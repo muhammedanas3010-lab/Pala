@@ -551,7 +551,7 @@
             }
         }
 
-        async function saveDataToCloud(collectionName, id, data) {
+                async function saveDataToCloud(collectionName, id, data) {
             localStorage.setItem('kaiz_sooq_data', JSON.stringify(appData));
             refreshUI();
 
@@ -564,6 +564,7 @@
                     }, 2000);
                 } catch(e) {
                     console.error("Cloud save error:", e);
+                    alert("Cloud Save Error: " + e.message);
                 }
             }
         }
